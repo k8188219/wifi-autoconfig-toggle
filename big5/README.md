@@ -6,6 +6,11 @@
 
 bat檔案最後的`:launch_programs`可自行修改加上要一併開啟的程式。
 
+# 下載
+
+右鍵另存連結為
+
+https://github.com/k8188219/wifi-autoconfig-toggle/raw/main/big5/wifi%20autoconfig%20toggle.bat
 
 # 建議使用方式
 
