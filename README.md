@@ -4,4 +4,4 @@ VR Streaming utils
 
 # 中文
 
-[中文 - R](./big5/README.md)
+[中文 - README](./big5/README.md)
