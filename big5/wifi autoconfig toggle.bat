@@ -16,7 +16,7 @@ IF %IS_ADMIN% == 0 (
 	call :launch_programs
 	
 	echo 需要管理員權限操作WIFI設定
-	echo Start-Process cmd -WindowStyle Minimized -Verb RunAs -ArgumentList "/c", '"%~f0"' | PowerShell -Command -
+	echo Start-Process cmd -Verb RunAs -ArgumentList "/c", '"%~f0"' | PowerShell -Command -
 	goto :eof
 )
 
