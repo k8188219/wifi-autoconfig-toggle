@@ -9,20 +9,34 @@ set ENABLE=[42m ±Ò¥Î [0m
 set DISABLE=[41m °±¥Î [0m
 
 :: ÀË¬d¬O§_¦³¥HºÞ²z­û¨­¥÷¹B¦æµ{¦¡
-NET FILE >NUL 2>&1
-IF %ERRORLEVEL% NEQ 0 (
-    echo µ{¦¡»Ý­n¥HºÞ²z­û¨­¥÷¹B¦æ¡A½Ð­«·s±Ò°Êµ{¦¡
-    :: PowerShell -Command "Start-Process cmd -Verb RunAs -ArgumentList '/c %~f0'"
-	PowerShell -Command "Start-Process cmd -Verb RunAs -ArgumentList ('/c """' + '%~f0' + '"""')"
-    EXIT /B
+call :test_admin IS_ADMIN
+
+IF %IS_ADMIN% == 0 (
+    :: ¥H«DºÞ²z­û¨­¥÷¶}±Ò¨ä¥Lµ{¦¡
+	call :launch_programs
+	
+	echo »Ý­nºÞ²z­ûÅv­­¾Þ§@WIFI³]©w
+	echo Start-Process cmd -WindowStyle Minimized -Verb RunAs -ArgumentList "/c", '"%~f0"' | PowerShell -Command -
+	goto :eof
 )
 
-call :launch_programs
-call :main
+IF %IS_ADMIN% == 1 (
+	call :main
+	goto :eof
+)
 
 goto :eof
 
 :: functions def
+:test_admin
+	NET FILE >NUL 2>&1
+	IF %ERRORLEVEL% NEQ 0 (
+		set %~1=0
+	) else (
+		set %~1=1
+	)
+	EXIT /B 0
+
 :color_output
 	set output=%~1
 	set output=%output:±Ò¥Î=!ENABLE!%
